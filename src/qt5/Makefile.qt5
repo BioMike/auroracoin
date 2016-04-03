@@ -115,7 +115,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_auroracoin_qt_OBJECTS = main.$(OBJEXT) mainwindow.$(OBJEXT)
+am_auroracoin_qt_OBJECTS = moc_mainwindow.$(OBJEXT) main.$(OBJEXT) \
+	mainwindow.$(OBJEXT)
 auroracoin_qt_OBJECTS = $(am_auroracoin_qt_OBJECTS)
 auroracoin_qt_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -248,7 +249,7 @@ LEVELDB_TARGET_FLAGS =
 LIBLEVELDB = 
 LIBMEMENV = 
 LIBOBJS = 
-LIBS = -lminiupnpc  -lssl  -lcrypto $(QT_LIBS)
+LIBS = -lminiupnpc  -lssl  -lcrypto 
 LN_S = ln -s
 LRELEASE = /usr/bin/lrelease
 LTLIBOBJS = 
@@ -257,7 +258,7 @@ MAINT =
 MAKEINFO = ${SHELL} /home/myckel/software/github/Auroracoin/src/build-aux/missing makeinfo
 MAKENSIS = 
 MKDIR_P = /bin/mkdir -p
-MOC = /usr/bin/moc
+MOC = /usr/lib64/qt5/bin/moc
 MOC_DEFS = -DHAVE_CONFIG_H -I$(top_srcdir)/src
 OBJC = gcc
 OBJCDEPMODE = depmode=gcc3
@@ -293,7 +294,7 @@ QT_DBUS_INCLUDES = -DQT_SHARED -I/usr/include/qt5 -I/usr/include/qt5/QtDBus -I/u
 QT_DBUS_LIBS = -L/usr/lib64/qt5 -lQtDBus -lQtXml -lQtCore 
 QT_INCLUDES = -DQT_SHARED -I/usr/include/qt5 -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtNetwork -I/usr/include/qt5 -I/usr/include/qt5/QtCore 
 QT_LDFLAGS = 
-QT_LIBS = -L/usr/lib64/qt5 -lQt5Gui -lQt5Widgets -lQt5Network -lQt5Core
+QT_LIBS = -L/usr/lib64/qt5 -lQtGui -lQtNetwork -lQtCore 
 QT_SELECT = qt5
 QT_TEST_CFLAGS = 
 QT_TEST_INCLUDES = 
@@ -368,7 +369,7 @@ target_alias =
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
-auroracoin_qt_SOURCES = main.cpp mainwindow.cpp
+auroracoin_qt_SOURCES = moc_mainwindow.cpp main.cpp mainwindow.cpp
 all: all-am
 
 .SUFFIXES:
@@ -457,6 +458,7 @@ distclean-compile:
 
 include ./$(DEPDIR)/main.Po
 include ./$(DEPDIR)/mainwindow.Po
+include ./$(DEPDIR)/moc_mainwindow.Po
 
 .cpp.o:
 	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -680,6 +682,9 @@ uninstall-am: uninstall-binPROGRAMS
 
 .PRECIOUS: Makefile
 
+
+moc_%.cpp: %.h
+	$(MOC) $(DEFINES) $(INCPATH) $< -o $@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
