@@ -39,6 +39,7 @@ src/qt/test/moc*.cpp
 *.orig
 *.o
 *.o-*
+*.Po
 *.patch
 .auroracoin
 *.a

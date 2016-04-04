@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTextEdit>
 
 class AURMainWindow : public QMainWindow
 {
@@ -10,6 +11,9 @@ class AURMainWindow : public QMainWindow
 public:
     explicit AURMainWindow(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
     ~AURMainWindow();
+
+private:
+    QTextEdit *center;
 
 };
 
